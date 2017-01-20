@@ -44,11 +44,11 @@ class DefaultController extends Controller
             'yellow'  => 'Q943'
 
         );
+        $em = $this->getDoctrine()->getManager();
         foreach($colors as $c => $wdid){
             $color = new Color();
             $color->setColor($c);
             $color->setWikidataId($wdid);
-            $em = $this->getDoctrine()->getManager();
             $em->persist($color);
         }
         $em->flush();
@@ -61,20 +61,21 @@ class DefaultController extends Controller
      */
     public function insertPlantsAction(Request $request)
     {
-        if (($handle = fopen(__DIR__."/../../../data/plants.tsv", "r")) !== FALSE) {
+        /*if (($handle = fopen(__DIR__."/../../../data/plants.tsv", "r")) !== FALSE) {
+            $em = $this->getDoctrine()->getManager();
             while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) {
                 $plant = new Plant();
                 $plant->setWikidataId($data[0]);
                 $plant->setScientificName($data[1]);
                 $plant->setFinished(false);
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($plant);
             }
             fclose($handle);
             $em->flush();
         }
+        */
         $plant_count = count($this->getDoctrine()->getRepository('AppBundle:Plant')->findAll());
-        return new Response('Saved plants in the database. Total plants now: '.$plant_count);
+        return new Response('No new plants inserted. Use the command line. Total number of plants is: '.$plant_count);
     }
 
     /**
@@ -90,14 +91,17 @@ class DefaultController extends Controller
         if(!$queryData->has('action')){
             throw new MissingMandatoryParametersException('Mandatory parameter "action" is missing');
         }
-        $service = new API($queryData);
+        $service = new API($this->getDoctrine());
         $result = "";
         switch ($queryData->get('action')){
             case 'desc':
                 $result = $service->getDesc();
                 break;
             case 'tiles':
-                $result = $service->getTiles();
+                if(!$queryData->has('num')){
+                    throw new MissingMandatoryParametersException('Mandatory parameter "num" is missing for action "tiles"');
+                }
+                $result = $service->getTiles($queryData->get('num'));
                 break;
             case 'log_action':
                 $result = $service->getLogAction();

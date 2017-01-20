@@ -2,11 +2,11 @@
 
 namespace AppBundle\API;
 
-use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class API
 {
-    private $queryData;
+    private $registry;
 
     private $label = array ( "en" => "Flower Color" );
 	private $description = array ( "en" => "Assign flower colors to plants." );
@@ -14,13 +14,16 @@ class API
 
     /**
      * API constructor.
-     * @param $queryData ParameterBag
+     * @param $registry RegistryInterface
      */
-    public function __construct($queryData)
+    public function __construct($registry)
     {
-        $this->queryData = $queryData;
+        $this->registry = $registry;
     }
 
+    /**
+     * @return array
+     */
     public function getDesc()
     {
         return array(
@@ -30,9 +33,16 @@ class API
         );
     }
 
-    public function getTiles()
+    /**
+     * @param $num int - Number of tiles to return
+     * @param $lang string - Preferred language code (default: "en")
+     * @return array
+     */
+    public function getTiles($num, $lang="en")
     {
-        return array(array("a" => 13));
+        $plants = $this->registry->getRepository('AppBundle:Plant')->findAll();
+        $random_keys = array_rand($plants, $num);
+        return array("keys" => $random_keys);
     }
 
     public function getLogAction()
