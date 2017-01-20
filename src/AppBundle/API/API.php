@@ -47,6 +47,12 @@ class API
             $tile = array();
             $tile['id'] = $plants[$random_keys[$i]]->getId();
             $tile['sections'] = array(array('type' => 'item', 'q' => $plants[$random_keys[$i]]->getWikidataId()));
+            $tile['controls'] = array(array('type' => 'buttons', 'entries' => array(
+                array('type' => 'green', 'decision' => 'yes', 'label' => 'Yes'),
+                array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip'),
+                array('type' => 'blue', 'decision' => 'no', 'label' => 'No'),
+
+            )));
             $tiles[] = $tile;
         }
         return $tiles;
