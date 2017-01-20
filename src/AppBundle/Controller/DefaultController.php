@@ -96,6 +96,12 @@ class DefaultController extends Controller
             case 'desc':
                 $result = $service->getDesc();
                 break;
+            case 'tiles':
+                $result = $service->getTiles();
+                break;
+            case 'log_action':
+                $result = $service->getLogAction();
+                break;
             default:
                 $result = array('error' => 'No valid action!');
         }
