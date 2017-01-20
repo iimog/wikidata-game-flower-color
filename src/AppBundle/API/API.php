@@ -46,7 +46,10 @@ class API
         for($i=0; $i<$num; $i++){
             $tile = array();
             $tile['id'] = $plants[$random_keys[$i]]->getId();
-            $tile['sections'] = array(array('type' => 'item', 'q' => $plants[$random_keys[$i]]->getWikidataId()));
+            $tile['sections'] = array(
+                array('type' => 'item', 'q' => $plants[$random_keys[$i]]->getWikidataId()),
+                array('type' => 'wikipage', 'title' => $plants[$random_keys[$i]]->getScientificName())
+            );
             $tile['controls'] = array(array('type' => 'buttons', 'entries' => array(
                 array('type' => 'green', 'decision' => 'yes', 'label' => 'Yes'),
                 array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip'),
