@@ -5,14 +5,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="tile")
+ * @ORM\Table(name="plant")
  */
-class Tile
+class Plant
 {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -22,9 +22,24 @@ class Tile
     private $wikidata_id;
 
     /**
+     * @ORM\Column(type="string", length=300)
+     */
+    private $scientific_name;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $finished;
+
+    /**
+     * Many Plants have Many FlowerColors.
+     * @ORM\ManyToMany(targetEntity="Color")
+     * @ORM\JoinTable(name="plant_colors",
+     *      joinColumns={@ORM\JoinColumn(name="plant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="color_id", referencedColumnName="id")}
+     *      )
+     */
+    private $flower_colors;
 
     /**
      * Get id
@@ -82,5 +97,70 @@ class Tile
     public function getFinished()
     {
         return $this->finished;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->flower_colors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set scientificName
+     *
+     * @param string $scientificName
+     *
+     * @return Plant
+     */
+    public function setScientificName($scientificName)
+    {
+        $this->scientific_name = $scientificName;
+
+        return $this;
+    }
+
+    /**
+     * Get scientificName
+     *
+     * @return string
+     */
+    public function getScientificName()
+    {
+        return $this->scientific_name;
+    }
+
+    /**
+     * Add flowerColor
+     *
+     * @param \AppBundle\Entity\Color $flowerColor
+     *
+     * @return Plant
+     */
+    public function addFlowerColor(\AppBundle\Entity\Color $flowerColor)
+    {
+        $this->flower_colors[] = $flowerColor;
+
+        return $this;
+    }
+
+    /**
+     * Remove flowerColor
+     *
+     * @param \AppBundle\Entity\Color $flowerColor
+     */
+    public function removeFlowerColor(\AppBundle\Entity\Color $flowerColor)
+    {
+        $this->flower_colors->removeElement($flowerColor);
+    }
+
+    /**
+     * Get flowerColors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFlowerColors()
+    {
+        return $this->flower_colors;
     }
 }
