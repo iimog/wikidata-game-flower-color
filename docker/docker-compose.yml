@@ -1,0 +1,14 @@
+version: '2'
+services:
+  db:
+    image: greatfireball/generic_postgresql_db
+    environment:
+      DB_USER: wikidata
+      DB_PW: wikidata
+      DB_NAME: wikidata
+  web:
+    image: iimog/wikidata-game-flower-color
+    ports:
+    - "8889:80"
+    links:
+    - "db:db"
