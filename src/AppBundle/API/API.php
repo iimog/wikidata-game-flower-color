@@ -42,7 +42,14 @@ class API
     {
         $plants = $this->registry->getRepository('AppBundle:Plant')->findAll();
         $random_keys = array_rand($plants, $num);
-        return array("keys" => $random_keys);
+        $tiles = array();
+        for($i=0; $i<$num; $i++){
+            $tile = array();
+            $tile['id'] = $plants[$random_keys[$i]]->getId();
+            $tile['sections'] = array(array('type' => 'item', 'q' => $plants[$random_keys[$i]]->getWikidataId()));
+            $tiles[] = $tile;
+        }
+        return $tiles;
     }
 
     public function getLogAction()
