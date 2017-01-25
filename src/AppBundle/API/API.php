@@ -40,7 +40,7 @@ class API
      */
     public function getTiles($num, $lang="en")
     {
-        $plants = $this->registry->getRepository('AppBundle:Plant')->findAll();
+        $plants = $this->registry->getRepository('AppBundle:Plant')->findBy(array('finished' => false));
         $random_keys = array_rand($plants, $num);
         $tiles = array();
         for($i=0; $i<$num; $i++){
@@ -61,8 +61,18 @@ class API
         return $tiles;
     }
 
-    public function getLogAction()
+    /**
+     * @param $id
+     * @param $decision
+     * @param $user
+     * @return array
+     */
+    public function getLogAction($id, $decision, $user)
     {
-        return array(array("a" => 13));
+        $plant = $this->registry->getRepository('AppBundle:Plant')->find($id);
+        $color = $this->registry->getRepository('AppBundle:Color')->findOneBy(array('wikidata_id' => $decision));
+        $plant->addFlowerColor($color);
+        $plant->setFinished(true);
+        return array('success' => true);
     }
 }

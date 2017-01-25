@@ -104,7 +104,16 @@ class DefaultController extends Controller
                 $result = $service->getTiles($queryData->get('num'));
                 break;
             case 'log_action':
-                $result = $service->getLogAction();
+                if(!$queryData->has('user')){
+                    throw new MissingMandatoryParametersException('Mandatory parameter "user" is missing for action "log_action"');
+                }
+                if(!$queryData->has('tile')){
+                    throw new MissingMandatoryParametersException('Mandatory parameter "tile" is missing for action "log_action"');
+                }
+                if(!$queryData->has('decision')){
+                    throw new MissingMandatoryParametersException('Mandatory parameter "decision" is missing for action "log_action"');
+                }
+                $result = $service->getLogAction($queryData->get('tile'), $queryData->get('decision'), $queryData->get('user'));
                 break;
             default:
                 $result = array('error' => 'No valid action!');
