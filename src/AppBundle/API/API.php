@@ -48,7 +48,8 @@ class API
             $tile['id'] = $plants[$random_keys[$i]]->getId();
             $tile['sections'] = array(
                 array('type' => 'item', 'q' => $plants[$random_keys[$i]]->getWikidataId()),
-                array('type' => 'wikipage', 'title' => $plants[$random_keys[$i]]->getScientificName(), 'wiki' => 'enwiki')
+                array('type' => 'wikipage', 'title' => $plants[$random_keys[$i]]->getScientificName(), 'wiki' => 'enwiki'),
+                array('type' => 'text', 'text' => '<img src="https://cdn.pixabay.com/photo/2016/01/21/19/57/marguerite-1154604_960_720.jpg">image</img>')
             );
             $tile['controls'] = array(array('type' => 'buttons', 'entries' => array(
                 array('type' => 'green', 'decision' => 'yes', 'label' => 'Yes'),
