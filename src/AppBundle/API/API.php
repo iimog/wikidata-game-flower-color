@@ -50,14 +50,12 @@ class API
                 array('type' => 'item', 'q' => $plants[$random_keys[$i]]->getWikidataId()),
                 array('type' => 'wikipage', 'title' => $plants[$random_keys[$i]]->getScientificName(), 'wiki' => 'enwiki')
             );
-            $tile['controls'] = array(array('type' => 'buttons', 'entries' => array(
-                array('type' => 'blue', 'decision' => 'done', 'label' => 'Done'),
-                array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip')
-            )));
+            $tile['controls'] = array(array('type' => 'buttons', 'entries' => array()));
             $colors = $this->registry->getRepository('AppBundle:Color')->findAll();
             foreach ($colors as $color){
                 $tile['controls'][0]['entries'][] = array('type' => 'green', 'decision' => $color->getWikidataId(), 'label' => $color->getColor());
             }
+            $tile['controls'][0]['entries'][] = array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip');
             $tiles[] = $tile;
         }
         return $tiles;
