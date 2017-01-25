@@ -10,7 +10,7 @@ class API
 
     private $label = array ( "en" => "Flower Color" );
 	private $description = array ( "en" => "Assign flower colors to plants." );
-	private $icon = 'https://cdn.pixabay.com/photo/2016/01/21/19/57/marguerite-1154604_960_720.jpg';
+	private $icon = 'https://wikidatagame.iimog.org/assets/img/marguerite-1154604_960_720.jpg';
 	const FLOWER_COLOR_PROPERTY = 'P2827';
 
     /**
