@@ -104,6 +104,7 @@ class DefaultController extends Controller
                 $result = $service->getTiles($queryData->get('num'));
                 break;
             case 'log_action':
+                error_log('log_action requested');
                 if(!$queryData->has('user')){
                     throw new MissingMandatoryParametersException('Mandatory parameter "user" is missing for action "log_action"');
                 }
