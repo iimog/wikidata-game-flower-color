@@ -74,15 +74,15 @@ class API
     /**
      * @param $id
      * @param $decision
-     * @param $user
      * @return array
      */
-    public function getLogAction($id)
+    public function getLogAction($id, $decision)
     {
         $plant = $this->registry->getRepository('AppBundle:Plant')->find($id);
-        # $color = $this->registry->getRepository('AppBundle:Color')->findOneBy(array('wikidata_id' => $decision));
-        # $plant->addFlowerColor($color);
+        $color = $this->registry->getRepository('AppBundle:Color')->findOneBy(array('wikidata_id' => $decision));
+        $plant->addFlowerColor($color);
         $plant->setFinished(true);
+        $this->registry->getManager()->flush();
         return array('success' => true);
     }
 }
