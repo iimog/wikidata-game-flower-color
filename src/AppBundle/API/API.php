@@ -11,6 +11,7 @@ class API
     private $label = array ( "en" => "Flower Color" );
 	private $description = array ( "en" => "Assign flower colors to plants." );
 	private $icon = 'https://cdn.pixabay.com/photo/2016/01/21/19/57/marguerite-1154604_960_720.jpg';
+	const FLOWER_COLOR_PROPERTY = 'P2827';
 
     /**
      * API constructor.
@@ -53,7 +54,16 @@ class API
             $tile['controls'] = array(array('type' => 'buttons', 'entries' => array()));
             $colors = $this->registry->getRepository('AppBundle:Color')->findAll();
             foreach ($colors as $color){
-                $tile['controls'][0]['entries'][] = array('type' => 'green', 'decision' => $color->getWikidataId(), 'label' => $color->getColor());
+                $control = array('type' => 'green', 'decision' => $color->getWikidataId(), 'label' => $color->getColor());
+                $numericID = substr($color->getWikidataId(), 1);
+                $control['api_action'] = array(
+                    "action" => "wbcreateclaim",
+                    "entity" => $plants[$random_keys[$i]]->getWikidataId(),
+                    "property" => $this::FLOWER_COLOR_PROPERTY,
+                    "snaktype" => "value",
+                    "value" => "{\"entity-type\":\"item\",\"numeric-id\":".$numericID."}"
+                );
+                $tile['controls'][0]['entries'][] = $control;
             }
             $tile['controls'][0]['entries'][] = array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip');
             $tiles[] = $tile;
