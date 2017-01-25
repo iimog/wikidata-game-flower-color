@@ -77,11 +77,11 @@ class API
      * @param $user
      * @return array
      */
-    public function getLogAction($id, $decision, $user)
+    public function getLogAction($id)
     {
         $plant = $this->registry->getRepository('AppBundle:Plant')->find($id);
-        $color = $this->registry->getRepository('AppBundle:Color')->findOneBy(array('wikidata_id' => $decision));
-        $plant->addFlowerColor($color);
+        # $color = $this->registry->getRepository('AppBundle:Color')->findOneBy(array('wikidata_id' => $decision));
+        # $plant->addFlowerColor($color);
         $plant->setFinished(true);
         return array('success' => true);
     }
