@@ -48,15 +48,16 @@ class API
             $tile['id'] = $plants[$random_keys[$i]]->getId();
             $tile['sections'] = array(
                 array('type' => 'item', 'q' => $plants[$random_keys[$i]]->getWikidataId()),
-                array('type' => 'wikipage', 'title' => $plants[$random_keys[$i]]->getScientificName(), 'wiki' => 'enwiki'),
-                array('type' => 'text', 'text' => '<img src="https://cdn.pixabay.com/photo/2016/01/21/19/57/marguerite-1154604_960_720.jpg">image</img>')
+                array('type' => 'wikipage', 'title' => $plants[$random_keys[$i]]->getScientificName(), 'wiki' => 'enwiki')
             );
             $tile['controls'] = array(array('type' => 'buttons', 'entries' => array(
-                array('type' => 'green', 'decision' => 'yes', 'label' => 'Yes'),
-                array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip'),
-                array('type' => 'blue', 'decision' => 'no', 'label' => 'No'),
-
+                array('type' => 'blue', 'decision' => 'done', 'label' => 'Done'),
+                array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip')
             )));
+            $colors = $this->registry->getRepository('AppBundle:Color')->findAll();
+            foreach ($colors as $color){
+                $tile['controls'][0]['entries'][] = array('type' => 'green', 'decision' => $color->getWikidataId(), 'label' => $color->getColor());
+            }
             $tiles[] = $tile;
         }
         return $tiles;
