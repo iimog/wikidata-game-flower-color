@@ -4,7 +4,7 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1><span>Welcome to the Wikidata Game "Flower Color"</span></h1>
+                <h1>Welcome to the Wikidata Game "Flower Color"</h1>
             </div>
 
             <div id="status">
@@ -30,14 +30,5 @@
     #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
     #container { padding: 2em; }
     #welcome, #status { margin-bottom: 2em; }
-    #welcome h1 span { display: block; font-size: 75%; }
-
-    @media (min-width: 768px) {
-        #wrapper { width: 80%; margin: 2em auto; }
-        #status a, #next a { display: block; }
-
-        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-    }
 </style>
 {% endblock %}
