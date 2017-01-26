@@ -2,12 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Flower Color Wikidata Game{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        <h1>Welcome to the Wikidata Game "Flower Color"</h1>
+            The API is located <a href="{{ path('api') }}">here</a>.
+            For more info, documentation or bug reports please visit the <a href="https://github.com/iimog/wikidata-game-flower-color">github page</a>.
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
