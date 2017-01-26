@@ -25,8 +25,25 @@ If you have [wd](https://github.com/maxlath/wikidata-cli) and [jq](https://stedo
 ```bash
 wd sparql get_plants.rq | jq -r '.[] | .item + "\t" + .sciname + "\t" + .ncbi' >plants.tsv
 ```
-In order to convert the tsv file into a sql file ready for import into the database you can use this perl command:
-```perl
+
+#### Generate SQL files
+In order to convert the tsv files into sql files ready for import into the database you can use this perl commands:
+```bash
+# Colors
+perl -F"\t" -ane '
+BEGIN{
+    print "INSERT INTO color (wikidata_id, color) VALUES\n";
+    $needComma=0;
+}
+next if(/^#/);
+print ",\n" if($needComma);
+chomp $F[1];
+$needComma=1;
+print " ('\''$F[0]'\'', '\''$F[1]'\'')";
+END{
+    print ";\n";
+}' data/colors.tsv >data/colors.sql
+# Plants
 perl -F"\t" -ane '
 BEGIN{
     print "INSERT INTO plant (wikidata_id, scientific_name, finished) VALUES\n";
@@ -39,6 +56,7 @@ END{
     print ";\n";
 }' data/plants.tsv >data/plants.sql
 ```
+
 ### Logo
 The [logo](https://cdn.pixabay.com/photo/2016/01/21/19/57/marguerite-1154604_960_720.jpg)
 is a [free image](https://pixabay.com/en/service/terms/#usage)
