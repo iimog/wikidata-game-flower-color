@@ -21,7 +21,24 @@ SELECT ?item ?sciname ?ncbi WHERE {
   FILTER EXISTS { ?item wdt:P105 wd:Q7432 }
 }
 ```
-
+If you have [wd](https://github.com/maxlath/wikidata-cli) and [jq](https://stedolan.github.io/jq/) installed you can re-generate the [plants.tsv](data/plants.tsv) with the following command:
+```bash
+wd sparql get_plants.rq | jq -r '.[] | .item + "\t" + .sciname + "\t" + .ncbi' >plants.tsv
+```
+In order to convert the tsv file into a sql file ready for import into the database you can use this perl command:
+```perl
+perl -F"\t" -ane '
+BEGIN{
+    print "INSERT INTO plant (wikidata_id, scientific_name, finished) VALUES\n";
+    $needComma=0;
+}
+print ",\n" if($needComma);
+$needComma=1;
+print " ('\''$F[0]'\'', '\''$F[1]'\'', FALSE)";
+END{
+    print ";\n";
+}' data/plants.tsv >data/plants.sql
+```
 ### Logo
 The [logo](https://cdn.pixabay.com/photo/2016/01/21/19/57/marguerite-1154604_960_720.jpg)
 is a [free image](https://pixabay.com/en/service/terms/#usage)
