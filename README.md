@@ -27,6 +27,7 @@ wd sparql get_plants.rq | jq -r '.[] | .item + "\t" + .sciname + "\t" + .ncbi' >
 ```
 
 #### Generate SQL files
+This step is only required if you updated the plants or colors tsv files.
 In order to convert the tsv files into sql files ready for import into the database you can use this perl commands:
 ```bash
 # Colors
@@ -56,6 +57,28 @@ END{
     print ";\n";
 }' data/plants.tsv >data/plants.sql
 ```
+
+### Hosting
+#### Docker
+To host an instance of this wikidata game you can use docker.
+To get a working setup execute the following commands:
+```bash
+docker pull greatfireball/generic_postgresql_db
+docker pull iimog/wikidata-game-flower-color
+docker run -d -e "DB_USER=wikidata" -e "DB_PW=wikidata" -e "DB_NAME=wikidata" --name wikidata-db greatfireball/generic_postgresql_db
+docker run -d -p 8083:80 --link wikidata-db:db --name wikidata-web iimog/wikidata-game-flower-color
+# now fill the database
+docker exec -it wikidata-web /bin/bash
+# the following commands are executed inside the docker container
+cd /wikidata-game-flower-color
+php bin/console doctrine:schema:update --force
+# Enter password 'wikidata' when prompted
+psql -U wikidata -d wikidata -h db <data/colors.sql
+psql -U wikidata -d wikidata -h db <data/plants.sql
+exit
+```
+Now the api is reachable at localhost port 8083.
+You can check with `http://localhost:8083/api?action=desc`.
 
 ### Logo
 The [logo](https://cdn.pixabay.com/photo/2016/01/21/19/57/marguerite-1154604_960_720.jpg)
