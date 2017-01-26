@@ -86,3 +86,7 @@ is a [free image](https://pixabay.com/en/service/terms/#usage)
 ([CC-0](https://creativecommons.org/publicdomain/zero/1.0/deed.en))
 from [pixaby.com](https://pixabay.com)
 uploaded by user [Dieter_G](https://pixabay.com/en/users/Dieter_G-359839/).
+
+### Changes
+#### v0.1.0 <small>(2017-01-26)</small>
+ - Initial Release
