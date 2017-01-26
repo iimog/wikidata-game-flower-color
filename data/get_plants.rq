@@ -1,0 +1,7 @@
+SELECT ?item ?sciname ?ncbi WHERE {
+  ?item (wdt:P171*) wd:Q25314 .
+  ?item wdt:P685 ?ncbi .
+  ?item wdt:P225 ?sciname .
+  FILTER EXISTS { ?item wdt:P18 ?picture }
+  FILTER EXISTS { ?item wdt:P105 wd:Q7432 }
+}
