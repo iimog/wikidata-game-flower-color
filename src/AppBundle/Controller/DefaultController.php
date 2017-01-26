@@ -2,15 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Color;
-use AppBundle\Entity\Plant;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use AppBundle\API\API;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 
 class DefaultController extends Controller
@@ -24,58 +21,6 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
-    }
-
-    /**
-     * @Route("/insertColors", name="insert_colors")
-     */
-    public function insertColorsAction(Request $request)
-    {
-        $colors = array(
-            'blue'    => 'Q1088',
-            'brown'   => 'Q47071',
-            'cyan'    => 'Q180778',
-            'green'   => 'Q3133',
-            'magenta' => 'Q3276756',
-            'orange'  => 'Q39338',
-            'purple'  => 'Q3257809',
-            'red'     => 'Q3142',
-            'white'   => 'Q23444',
-            'yellow'  => 'Q943'
-
-        );
-        $em = $this->getDoctrine()->getManager();
-        foreach($colors as $c => $wdid){
-            $color = new Color();
-            $color->setColor($c);
-            $color->setWikidataId($wdid);
-            $em->persist($color);
-        }
-        $em->flush();
-        $color_count = count($this->getDoctrine()->getRepository('AppBundle:Color')->findAll());
-        return new Response('Saved colors in the database. Total colors now: '.$color_count);
-    }
-
-    /**
-     * @Route("/insertPlants", name="insert_plants")
-     */
-    public function insertPlantsAction(Request $request)
-    {
-        /*if (($handle = fopen(__DIR__."/../../../data/plants.tsv", "r")) !== FALSE) {
-            $em = $this->getDoctrine()->getManager();
-            while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) {
-                $plant = new Plant();
-                $plant->setWikidataId($data[0]);
-                $plant->setScientificName($data[1]);
-                $plant->setFinished(false);
-                $em->persist($plant);
-            }
-            fclose($handle);
-            $em->flush();
-        }
-        */
-        $plant_count = count($this->getDoctrine()->getRepository('AppBundle:Plant')->findAll());
-        return new Response('No new plants inserted. Use the command line. Total number of plants is: '.$plant_count);
     }
 
     /**
