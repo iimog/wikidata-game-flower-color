@@ -33,4 +33,10 @@ class FlowerColorTest extends KernelTestCase
         $this->assertEquals($desc['label']['en'], 'Flower Color');
         $this->assertEquals($desc['icon'], 'https://wikidatagame.iimog.org/assets/img/marguerite-1154604_960_720.jpg');
     }
+
+    public function testTiles()
+    {
+        $tiles = $this->flowerColor->getTiles(5);
+        $this->assertEquals(count($tiles), 5);
+    }
 }
