@@ -73,8 +73,8 @@ docker exec -it wikidata-web /bin/bash
 cd /wikidata-game-flower-color
 php bin/console doctrine:schema:update --force
 # Enter password 'wikidata' when prompted
-psql -U wikidata -d wikidata -h db <data/colors.sql
-psql -U wikidata -d wikidata -h db <data/plants.sql
+php bin/console doctrine:database:import data/colors.sql
+php bin/console doctrine:database:import data/plants.sql
 exit
 ```
 Now the api is reachable at localhost port 8083.
