@@ -1,11 +1,11 @@
 INSERT INTO color (wikidata_id, color) VALUES
- ('blue', 'Q1088'),
- ('brown', 'Q47071'),
- ('cyan', 'Q180778'),
- ('green', 'Q3133'),
- ('magenta', 'Q3276756'),
- ('orange', 'Q39338'),
- ('purple', 'Q3257809'),
- ('red', 'Q3142'),
- ('white', 'Q23444'),
- ('yellow', 'Q943');
+ ('Q1088', 'blue'),
+ ('Q47071', 'brown'),
+ ('Q180778', 'cyan'),
+ ('Q3133', 'green'),
+ ('Q3276756', 'magenta'),
+ ('Q39338', 'orange'),
+ ('Q3257809', 'purple'),
+ ('Q3142', 'red'),
+ ('Q23444', 'white'),
+ ('Q943', 'yellow');
