@@ -4,6 +4,8 @@ wikidata-game-flower-color
 [![Build Status](https://secure.travis-ci.org/iimog/wikidata-game-flower-color.png?branch=master)](http://travis-ci.org/iimog/wikidata-game-flower-color)
 [![Coverage Status](https://coveralls.io/repos/github/iimog/wikidata-game-flower-color/badge.svg?branch=master)](https://coveralls.io/github/iimog/wikidata-game-flower-color?branch=master)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.260330.svg)](https://doi.org/10.5281/zenodo.260330)
+
 
 A mini-game for the [distributed wikidata game](https://tools.wmflabs.org/wikidata-game/distributed/).
 It helps to assign the flower color property [P2827](https://www.wikidata.org/wiki/Property:P2827) to plants in [wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page).
