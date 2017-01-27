@@ -36,7 +36,14 @@ class FlowerColorTest extends KernelTestCase
 
     public function testTiles()
     {
+        $tiles = $this->flowerColor->getTiles(7);
+        $this->assertEquals(count($tiles), 7);
         $tiles = $this->flowerColor->getTiles(5);
         $this->assertEquals(count($tiles), 5);
+        $tiles = $this->flowerColor->getTiles(2);
+        $this->assertEquals(count($tiles), 2);
+        $num_of_colors = count($this->doctrine->getManager()->getRepository('AppBundle:Color')->findAll());
+        $this->assertEquals(count($tiles[0]['controls'][0]['entries']), $num_of_colors+1, 'There should be one button for each color and a skip button');
+        $this->assertEquals(count($tiles[1]['controls'][0]['entries']), $num_of_colors+1, 'There should be one button for each color and a skip button');
     }
 }
