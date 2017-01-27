@@ -2,12 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\API\FlowerColor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ParameterBag;
-use AppBundle\API\API;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 
 class DefaultController extends Controller
@@ -24,7 +24,7 @@ class DefaultController extends Controller
     /**
      * @param $request Request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
-     * @Route("/api", name="api")
+     * @Route("/flowercolor", name="flowercolor")
      */
     public function apiAction(Request $request){
         $queryData = new ParameterBag(array_merge($request->query->all(), $request->request->all()));
@@ -34,7 +34,7 @@ class DefaultController extends Controller
         if(!$queryData->has('action')){
             throw new MissingMandatoryParametersException('Mandatory parameter "action" is missing');
         }
-        $service = new API($this->getDoctrine());
+        $service = new FlowerColor($this->getDoctrine());
         $result = "";
         switch ($queryData->get('action')){
             case 'desc':

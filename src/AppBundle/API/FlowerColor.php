@@ -4,7 +4,7 @@ namespace AppBundle\API;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class API
+class FlowerColor
 {
     private $registry;
 
