@@ -54,6 +54,20 @@ class FlowerColorTest extends KernelTestCase
         $plant = $this->doctrine->getManager()->getRepository('AppBundle:Plant')->find($tiles[1]['id']);
         $this->assertEquals($tiles[1]['sections'][0]['q'], $plant->getWikidataId(), 'Query in second tile correct');
         $this->assertEquals($tiles[1]['sections'][1]['title'], $plant->getScientificName(), 'Scientific name in second tile correct');
+    }
+
+    public function testLogAction()
+    {
+        $plant_id = 42;
+        $plant = $this->doctrine->getManager()->getRepository('AppBundle:Plant')->find($plant_id);
+        $this->assertEquals($plant->getFinished(), false, 'Before log action: plant is not finished');
+        $this->assertEquals(count($plant->getFlowerColors()), 0, 'Before log action: plant has no colors');
+        $color = $this->doctrine->getManager()->getRepository('AppBundle:Color')->find(7);
+        $this->flowerColor->getLogAction($plant_id, $color->getWikidataId());
+        $plant = $this->doctrine->getManager()->getRepository('AppBundle:Plant')->find($plant_id);
+        $this->assertEquals($plant->getFinished(), true, 'After log action: plant is finished');
+        $this->assertEquals(count($plant->getFlowerColors()), 1, 'After log action: plant has one color');
+        $this->assertEquals($plant->getFlowerColors()[0]->getWikidataID(), $color->getWikidataId(), 'After log action: plant has color from decision');
 
     }
 }
