@@ -1,5 +1,6 @@
 *~
 /app/config/parameters.yml
+/app/config/parameters_test.yml
 /build/
 /phpunit.xml
 /var/*
@@ -15,4 +16,4 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-.idea/
+/.idea/
