@@ -92,5 +92,10 @@ from [pixaby.com](https://pixabay.com)
 uploaded by user [Dieter_G](https://pixabay.com/en/users/Dieter_G-359839/).
 
 ### Changes
+#### v0.1.1 <small>(2017-01-27)</small>
+ - Add unit tests
+ - Add functional tests
+ - Add CI via Travis
+ - Add coverage reporting via coveralls
 #### v0.1.0 <small>(2017-01-26)</small>
  - Initial Release
