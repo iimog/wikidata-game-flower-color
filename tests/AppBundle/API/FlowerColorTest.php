@@ -37,13 +37,23 @@ class FlowerColorTest extends KernelTestCase
     public function testTiles()
     {
         $tiles = $this->flowerColor->getTiles(7);
-        $this->assertEquals(count($tiles), 7);
+        $this->assertEquals(count($tiles), 7, 'Correct number of tiles: 7');
         $tiles = $this->flowerColor->getTiles(5);
-        $this->assertEquals(count($tiles), 5);
+        $this->assertEquals(count($tiles), 5, 'Correct number of tiles: 5');
         $tiles = $this->flowerColor->getTiles(2);
-        $this->assertEquals(count($tiles), 2);
+        $this->assertEquals(count($tiles), 2, 'Correct number of tiles: 2');
         $num_of_colors = count($this->doctrine->getManager()->getRepository('AppBundle:Color')->findAll());
         $this->assertEquals(count($tiles[0]['controls'][0]['entries']), $num_of_colors+1, 'There should be one button for each color and a skip button');
         $this->assertEquals(count($tiles[1]['controls'][0]['entries']), $num_of_colors+1, 'There should be one button for each color and a skip button');
+        $this->assertEquals($tiles[0]['sections'][0]['type'], 'item', 'First section should be of type item');
+        $this->assertEquals($tiles[0]['sections'][1]['type'], 'wikipage', 'Second section should be of type wikipage');
+        $this->assertEquals(substr($tiles[0]['sections'][0]['q'],0,1), 'Q', 'Query starts with Q');
+        $plant = $this->doctrine->getManager()->getRepository('AppBundle:Plant')->find($tiles[0]['id']);
+        $this->assertEquals($tiles[0]['sections'][0]['q'], $plant->getWikidataId(), 'Query in first tile correct');
+        $this->assertEquals($tiles[0]['sections'][1]['title'], $plant->getScientificName(), 'Scientific name in first tile correct');
+        $plant = $this->doctrine->getManager()->getRepository('AppBundle:Plant')->find($tiles[1]['id']);
+        $this->assertEquals($tiles[1]['sections'][0]['q'], $plant->getWikidataId(), 'Query in second tile correct');
+        $this->assertEquals($tiles[1]['sections'][1]['title'], $plant->getScientificName(), 'Scientific name in second tile correct');
+
     }
 }
