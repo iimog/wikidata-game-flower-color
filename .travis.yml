@@ -13,6 +13,7 @@ addons:
 
 before_script:
   - cp tests/.travis.parameters_test.yml app/config/parameters_test.yml
+  - mkdir -p build/logs
 
 script:
   - phpunit
