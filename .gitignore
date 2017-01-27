@@ -17,3 +17,4 @@
 /vendor/
 /web/bundles/
 /.idea/
+/tests/clover.xml
