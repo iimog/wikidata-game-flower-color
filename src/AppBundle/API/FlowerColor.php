@@ -8,14 +8,17 @@ class FlowerColor
 {
     private $registry;
 
-    private $label = array ( "en" => "Flower Color" );
-	private $description = array ( "en" => "Assign flower colors to plants. ".
+	const FLOWER_COLOR_PROPERTY = 'P2827';
+    const LABEL_EN = "Flower Color";
+    const DESCRIPTION_EN = "Assign flower colors to plants. ".
         "Due to limitations of the game and quality concerns the Wikidata API action is disabled for now. ".
         "So no entries are altered on Wikidata but your decisions are still stored in a separate database. ".
-        "To learn more visit https://github.com/iimog/wikidata-game-flower-color"
-    );
-	private $icon = 'https://wikidatagame.iimog.org/assets/img/marguerite-1154604_960_720.jpg';
-	const FLOWER_COLOR_PROPERTY = 'P2827';
+        "To learn more visit https://github.com/iimog/wikidata-game-flower-color";
+    const ICON = 'https://wikidatagame.iimog.org/assets/img/marguerite-1154604_960_720.jpg';
+
+    private $label = array ( "en" => FlowerColor::LABEL_EN );
+	private $description = array ( "en" => FlowerColor::DESCRIPTION_EN );
+	private $icon = FlowerColor::ICON;
 
     /**
      * API constructor.
