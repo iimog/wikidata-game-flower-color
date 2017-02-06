@@ -9,6 +9,32 @@ wikidata-game-flower-color
 
 A mini-game for the [distributed wikidata game](https://tools.wmflabs.org/wikidata-game/distributed/).
 It helps to assign the flower color property [P2827](https://www.wikidata.org/wiki/Property:P2827) to plants in [wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page).
+Attention! The Wikidata API action is disabled, so no values are altered there (see Limitations section for details).
+
+### Idea
+Many Wikidata items contain images with clearly visible flowers.
+Also a lot of Wikipedia articles contain textual descriptions of plant morphology including flower color.
+This information can be easily extracted by a human but not automatically by a computer.
+Therefore this game aims to make it easy for people to add this information to the structured database of Wikidata.
+
+### Limitations
+Guessing flower color from images can be problematic for a number of reasons.
+Perception of colors by humans is different and the game only provides a limited list of predefined color categories (e.g. blue).
+Fine distinctions like light-blue vs dark-blue are not possible.
+Using the game it is only possible to add a single color and not to cover cases where one flower has multiple colors,
+ different parts of the flower (e.g. sepals and petals) have different colors or one species appears in different forms.
+Further concerns about the reliability of entries generated with this game without citing concrete sources exist.
+Therefore the API action is disabled for now.
+Here is the relevant part of the conversation on [Wikidata](https://www.wikidata.org/wiki/Property_talk:P2827):
+
+> Iimog, without good sources these additions are worthless. I reverted two of your addition allready. --Succu (talk) 09:45, 27 January 2017 (UTC)
+> Looks like your source is TraitBank (flower color) which in turn is heavily based on USDAs PLANTS Characteristics. There flower color is defined as the „predominant color of the flowers“. --Succu (talk) 17:14, 28 January 2017 (UTC)
+>> Succu, thanks for the feedback. However, I don't agree that those additions are worthless without good sources. My assumption was that the flower color of many plants can be easily derived by anyone from existing images in wikidata and wikipedia articles. Many articles contain sections describing the plant including the color of the flower for example Monarda didyma contains "It has ragged, bright red tubular flowers 3–4 cm long, [...]". I think it would be very beneficial to have this information available in a structured, machine readable way. Therefore I built the wikidata game to make it easy for everybody to add those values. In fact I used the colors used in TraitBank as a preliminary list of possible colors in the game. As said this game has still some limitations. Nevertheless I consider the additions made by playing the game as valuable. As those additions do not have a source associated it is still easily possible to filter those entries out in a SPARQL query. Please let me know if you do not agree. --Iimog 09:55, 01 February 2017 (UTC)
+>>> Iimog, major Wikipedias criticize Wikidata for the lack of reliable sources and I agree. Guessing flower color (P2827) from pictures of uncertain quality (and origin) is banned by Wikipedia:No original research (Q4656524). --Succu (talk) 20:07, 3 February 2017 (UTC)
+>>>> Succu, thanks for the further explanation. While I still think that more data of mixed quality can be beneficial I understand that in many cases less data of high quality is preferable. Therefore I deactivated the API action in the flower color game so that no more entries are added. Thanks again for your valuable feedback. Iimog (talk) 09:35, 6 February 2017 (UTC)
+
+
+
 
 ### Database
 #### Colors
