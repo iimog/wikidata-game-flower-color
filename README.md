@@ -120,6 +120,8 @@ from [pixaby.com](https://pixabay.com)
 uploaded by user [Dieter_G](https://pixabay.com/en/users/Dieter_G-359839/).
 
 ### Changes
+#### v0.1.2 <small>(2017-02-06)</small>
+ - Deactivate Wikidata API action (decisions are only stored locally but not sent to Wikidata)
 #### v0.1.1 <small>(2017-01-27)</small>
  - Add unit tests
  - Add functional tests
