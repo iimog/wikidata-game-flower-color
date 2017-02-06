@@ -56,13 +56,13 @@ class FlowerColor
             foreach ($colors as $color){
                 $control = array('type' => 'green', 'decision' => $color->getWikidataId(), 'label' => $color->getColor());
                 $numericID = substr($color->getWikidataId(), 1);
-                $control['api_action'] = array(
-                    "action" => "wbcreateclaim",
-                    "entity" => $plants[$random_keys[$i]]->getWikidataId(),
-                    "property" => $this::FLOWER_COLOR_PROPERTY,
-                    "snaktype" => "value",
-                    "value" => "{\"entity-type\":\"item\",\"numeric-id\":".$numericID."}"
-                );
+//                $control['api_action'] = array(
+//                    "action" => "wbcreateclaim",
+//                    "entity" => $plants[$random_keys[$i]]->getWikidataId(),
+//                    "property" => $this::FLOWER_COLOR_PROPERTY,
+//                    "snaktype" => "value",
+//                    "value" => "{\"entity-type\":\"item\",\"numeric-id\":".$numericID."}"
+//                );
                 $tile['controls'][0]['entries'][] = $control;
             }
             $tile['controls'][0]['entries'][] = array('type' => 'white', 'decision' => 'skip', 'label' => 'Skip');
