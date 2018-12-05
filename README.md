@@ -6,10 +6,12 @@ wikidata-game-flower-color
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.260330.svg)](https://doi.org/10.5281/zenodo.260330)
 
-
 A mini-game for the [distributed wikidata game](https://tools.wmflabs.org/wikidata-game/distributed/).
 It helps to assign the flower color property [P2827](https://www.wikidata.org/wiki/Property:P2827) to plants in [wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page).
 Attention! The Wikidata API action is disabled, so no values are altered there (see Limitations section for details).
+
+### Update 2018-12-04: The game server is now deactivated
+As I was moving servers and this one never made it into production (for details see discussion below) I decided to shut it down instead of migrating it. If you want to have it back, just let me know. Your feedback will give me the motivation required to setup a fresh instance on my new server.
 
 ### Idea
 Many Wikidata items contain images with clearly visible flowers.
